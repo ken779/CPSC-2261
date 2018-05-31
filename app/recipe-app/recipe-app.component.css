@@ -1,0 +1,12 @@
+.select{
+    background-color: lightblue;
+}
+
+
+td{
+    cursor: pointer;
+}
+
+option{
+    cursor: pointer;
+}

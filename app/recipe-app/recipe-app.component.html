@@ -1,0 +1,45 @@
+<table>
+    <tr>
+        <th>List of Recipes</th>
+    </tr>
+    <tr *ngFor="let recipe of recipeList" class="recipeListItem" (click)="selectRecipe(recipe)" class="{{recipe == selectedRecipe?'select':'' }}">
+        <td #name id="{{recipe.recipeName}}">{{recipe.recipeName}}</td>
+    </tr>
+</table>
+<hr>
+<div *ngIf="selectedRecipe != null">
+    <h3>Selected Recipe: {{selectedRecipe.recipeName}}</h3>
+    Estimated Time: {{selectedRecipe.estimatedTime}} minutes<br><br>
+    Ingredients: 
+    <div *ngFor="let item of selectedRecipe.ingredientList">
+        {{item.name}}
+    </div><br>
+    {{selectedRecipe.instructionList}}
+    Delete this selected recipe?  <input type="button" id="recipeDeleteButton" value="Delete" (click)="deleteRecipe(selectedRecipe)">
+    <hr>
+</div>
+
+<h3>Recipe Creator</h3>
+<div id="recCreator">
+    Recipe name: <input type="text" id="recipeNameInput" name="" style="width: 200px;" #recipeName><br>
+    Estimated time(min) : <input type="number" id="recipeTimeInput" name="" style="width: 80px;" #estTime><br>
+    <input type="button" id="recipeCreateButton" value="Create New Recipe" (click)="createRecipe(recipeName.value, estTime.value)"><br><br>
+</div><hr>
+
+<h3>Recipe Updater</h3>
+<div id="recUpdater">
+    Select Ingredients: 
+    <option *ngFor="let ing of ingredientList" [value]="ing" (click)="selectIng(ing)" class="{{ing == selectedIng?'select':'' }}">
+        {{ing.name}} 
+    </option>
+    <br>
+    Add Instruction: <input type="text" name="" style="width: 500px;" id="" #instruction><br>
+</div>
+
+<div *ngIf="selectedRecipe != null">
+    <input type="button" value="Update Ingredients" (click)="updateIngredients()">
+    <input type="button" value="Add Instruction" (click)="addInstruction(instruction.value)">
+    <br>
+    <input type="button" value="Delete Ingredient" (click)="deleteIngredient()">
+    <input type="button" value="Delete Instruction" (click)="deleteInstruction()">
+</div>
